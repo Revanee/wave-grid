@@ -1,13 +1,13 @@
 const points = []
 
-const gridWidth = 80
-const gridHeight = 80
+const gridWidth = Math.floor(window.innerWidth / 10)
+const gridHeight = Math.floor(window.innerHeight / 10)
 
 let getCellWidth = function () {return width / gridWidth}
 let getCellHeight = function () {return height / gridHeight}
 
 setup = function () {
-    createCanvas(600, 600, WEBGL)
+    createCanvas(window.innerWidth, window.innerHeight, WEBGL)
     for (let x = 0; x < gridWidth; x++) {
         points.push([])
         for (let y = 0; y < gridHeight; y++) {
