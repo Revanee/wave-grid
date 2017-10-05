@@ -1,7 +1,7 @@
 const points = []
 
-const gridWidth = Math.floor(window.innerWidth / 10)
-const gridHeight = Math.floor(window.innerHeight / 10)
+const gridWidth = 100
+const gridHeight = Math.floor((window.innerHeight / window.innerWidth) * gridWidth)
 
 let getCellWidth = function () {return width / gridWidth}
 let getCellHeight = function () {return height / gridHeight}
