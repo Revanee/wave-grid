@@ -36,7 +36,7 @@ draw = function () {
         let x = Math.floor(mouseX / (width / gridWidth))
         let y = Math.floor(mouseY / (height / gridHeight))
         if (x >= 0 && y >= 0 && x < gridWidth && y < gridHeight) {
-            points[x][y].nextVal = 100
+            points[x][y].nextVal = 50
             points[x][y].force = 0
         }
     }
@@ -49,7 +49,7 @@ draw = function () {
 
     //draw
     rotateX(PI * -0.20)
-    // translate(0, -height / 10)
+    translate(0, -height / 10)
     translate(-width / 2 + (width / gridWidth) / 2, -height / 2 + (height / gridHeight) / 2)
     background(30)
 
@@ -68,12 +68,13 @@ draw = function () {
 
     for (let x = 0; x < gridWidth - 1; x++) {
         fill('#42f4eb')
-        beginShape(POINTS)
+        beginShape()
         for (let y = 0; y < gridHeight - 1; y++) {
-            vertex(x * width / gridWidth, y * height / gridHeight, points[x][y].val)
-            vertex((x + 1) *  width / gridWidth, y * height / gridHeight, points[x + 1][y].val)
-            vertex(x * width / gridWidth, (y + 1) * height / gridHeight, points[x][y + 1].val)
-            vertex(x * width / gridWidth, y * height / gridHeight, points[x][y].val)
+            let scl = 5
+            vertex(x * width / gridWidth, y * height / gridHeight, points[x][y].val * scl)
+            vertex((x + 1) *  width / gridWidth, y * height / gridHeight, points[x + 1][y].val * scl)
+            vertex(x * width / gridWidth, (y + 1) * height / gridHeight, points[x][y + 1].val * scl)
+            vertex(x * width / gridWidth, y * height / gridHeight, points[x][y].val * scl)
             // vertex((x + 1) *  width / gridWidth, (y + 1) * height / gridHeight, points[x + 1][y + 1].val)
         }
         endShape()
@@ -91,7 +92,7 @@ class Point {
         this.force -= this.val
         this.force += ((adj / 2) - this.val)
         this.nextVal += this.force * 0.1
-        this.force *= 0.995
+        this.force *= 0.99
     }
     step () {
         this.val = this.nextVal
