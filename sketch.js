@@ -1,7 +1,7 @@
 const MODE = 1 // 1: Wireframe; 2: Cubes
 
 const FLUIDITY = 0.99 // 0 < x < 1 TIP: 1 means no loss in time
-const SPEED = 0.2 // 0 < x < 1 WARNING! High values make the simulation unstable
+const SPEED = 0.1 // 0 < x < 1 WARNING! High values make the simulation unstable
 const INTERACTION_STRENGTH = -50 // How muck force is given to a clicked point
 const MIN_AMMOUNT = 50 // Ammount of points on the shorter side of the grid
 
