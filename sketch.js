@@ -1,7 +1,7 @@
 const MODE = 1 // 1: Wireframe; 2: Cubes
 
 const FLUIDITY = 0.99 // 0 < x < 1 TIP: 1 means no loss in time
-const SPEED = 0.2 // 0 < x < 1 WARNING! High values make the simulation unstable
+const SPEED = 0.1 // 0 < x < 1 WARNING! High values make the simulation unstable
 const INTERACTION_STRENGTH = -50 // How muck force is given to a clicked point
 const MIN_AMMOUNT = 50 // Ammount of points on the shorter side of the grid
 
@@ -39,15 +39,15 @@ function draw () {
     translate(-width / 2 + POINT_MARGIN / 2, -height / 2 + POINT_MARGIN / 2)
 
     switch (MODE) {
-        case 1: drawWireframe() 
+        case 1: drawWireframe()
         break
-        case 2: drawCubes() 
+        case 2: drawCubes()
         break
     }
 
 }
 
-function interact () {    
+function interact () {
     if (mouseIsPressed) {
         let x = Math.floor(mouseX / POINT_MARGIN)
         let y = Math.floor(mouseY / POINT_MARGIN)
@@ -65,10 +65,16 @@ function calculate () {
             let right = points[x + 1] ? points[x + 1][y].val : null
             let up = points[x][y - 1] ? points[x][y - 1].val : null
             let down = points[x][y + 1] ? points[x][y + 1].val : null
-            let adj = left + right + up + down ? left + right + up + down : null
-            point.update(adj)
+
+            let tl = !!(left && up) ? points[x - 1][y - 1].val : null
+            let tr = !!(right && up) ? points[x + 1][y - 1].val : null
+            let bl = !!(left && down) ? points[x - 1][y + 1].val : null
+            let br = !!(right && down) ? points[x + 1][y + 1].val : null
+
+            let adj = left + right + up + down + ((tl + tr + bl + br)*.29)
+            point.update(adj*.776)
         })
-    })   
+    })
 }
 
 function step () {
