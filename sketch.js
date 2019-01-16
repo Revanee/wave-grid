@@ -65,8 +65,14 @@ function calculate () {
             let right = points[x + 1] ? points[x + 1][y].val : null
             let up = points[x][y - 1] ? points[x][y - 1].val : null
             let down = points[x][y + 1] ? points[x][y + 1].val : null
-            let adj = left + right + up + down ? left + right + up + down : null
-            point.update(adj)
+
+            let tl = !!(left && up) ? points[x - 1][y - 1].val : null
+            let tr = !!(right && up) ? points[x + 1][y - 1].val : null
+            let bl = !!(left && down) ? points[x - 1][y + 1].val : null
+            let br = !!(right && down) ? points[x + 1][y + 1].val : null
+
+            let adj = left + right + up + down + ((tl + tr + bl + br)*.29)
+            point.update(adj*.776)
         })
     })
 }
