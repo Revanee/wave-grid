@@ -39,15 +39,15 @@ function draw () {
     translate(-width / 2 + POINT_MARGIN / 2, -height / 2 + POINT_MARGIN / 2)
 
     switch (MODE) {
-        case 1: drawWireframe() 
+        case 1: drawWireframe()
         break
-        case 2: drawCubes() 
+        case 2: drawCubes()
         break
     }
 
 }
 
-function interact () {    
+function interact () {
     if (mouseIsPressed) {
         let x = Math.floor(mouseX / POINT_MARGIN)
         let y = Math.floor(mouseY / POINT_MARGIN)
@@ -68,7 +68,7 @@ function calculate () {
             let adj = left + right + up + down ? left + right + up + down : null
             point.update(adj)
         })
-    })   
+    })
 }
 
 function step () {
