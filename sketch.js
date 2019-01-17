@@ -28,7 +28,6 @@ function draw () {
 
     //update
     calculate()
-    interact()
     step()
 
     //draw
@@ -47,14 +46,20 @@ function draw () {
 
 }
 
-function interact () {
-    if (mouseIsPressed) {
-        let x = Math.floor(mouseX / POINT_MARGIN)
-        let y = Math.floor(mouseY / POINT_MARGIN)
-        if (x >= 0 && y >= 0 && x < GRID_WIDTH && y < GRID_HEIGHT) {
-            points[x][y].nextVal = INTERACTION_STRENGTH
-            points[x][y].force = 0
-        }
+function mouseDragged() {
+    interact(INTERACTION_STRENGTH/4)
+}
+
+function mousePressed() {
+    interact(INTERACTION_STRENGTH)
+}
+
+function interact(str) {
+    let x = Math.floor(mouseX / POINT_MARGIN)
+    let y = Math.floor(mouseY / POINT_MARGIN)
+    if (x >= 0 && y >= 0 && x < GRID_WIDTH && y < GRID_HEIGHT) {
+        points[x][y].nextVal += str
+        points[x][y].force = 0
     }
 }
 
