@@ -2,7 +2,7 @@ const MODE = 1 // 1: Wireframe; 2: Cubes
 
 const FLUIDITY = 0.99 // 0 < x < 1 TIP: 1 means no loss in time
 const SPEED = 0.1 // 0 < x < 1 WARNING! High values make the simulation unstable
-const INTERACTION_STRENGTH = -50 // How muck force is given to a clicked point
+const INTERACTION_STRENGTH = -30 // How muck force is given to a clicked point
 const MIN_AMMOUNT = 50 // Ammount of points on the shorter side of the grid
 
 const ASPECT_RATIO = window.innerWidth / window.innerHeight
@@ -28,7 +28,6 @@ function draw () {
 
     //update
     calculate()
-    interact()
     step()
 
     //draw
@@ -47,14 +46,20 @@ function draw () {
 
 }
 
-function interact () {
-    if (mouseIsPressed) {
-        let x = Math.floor(mouseX / POINT_MARGIN)
-        let y = Math.floor(mouseY / POINT_MARGIN)
-        if (x >= 0 && y >= 0 && x < GRID_WIDTH && y < GRID_HEIGHT) {
-            points[x][y].nextVal = INTERACTION_STRENGTH
-            points[x][y].force = 0
-        }
+function mouseDragged() {
+    interact(INTERACTION_STRENGTH/4)
+}
+
+function mousePressed() {
+    interact(INTERACTION_STRENGTH)
+}
+
+function interact(str) {
+    let x = Math.floor(mouseX / POINT_MARGIN)
+    let y = Math.floor(mouseY / POINT_MARGIN)
+    if (x >= 0 && y >= 0 && x < GRID_WIDTH && y < GRID_HEIGHT) {
+        points[x][y].nextVal += str
+        points[x][y].force = 0
     }
 }
 
